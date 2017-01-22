@@ -15,7 +15,7 @@ const ScheduleItem = ({ item }) => {
   };
 
   function clipString(str) {
-    const a = str.substring(10, 16);
+    const a = str.substring(11, 16);
     return a;
   }
 export default ScheduleItem;

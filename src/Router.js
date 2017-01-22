@@ -4,10 +4,16 @@ import ChannelList from './components/ChannelList';
 import Schedule from './components/Schedule';
 
 const RouterComponent = () => {
+
+  let date = () => {
+    return new Date().toString().substring(0, 10);
+  };
+
+
   return (
     <Router sceneStyle={{ paddingTop: 65 }}>
-      <Scene key='list' component={ChannelList} title="Channels" />
-      <Scene key='channel' component={Schedule} title="dagskrá" />
+      <Scene key='list' component={ChannelList} title="Stöðvar" />
+      <Scene key='channel' component={Schedule} title={date} />
     </Router>
   );
 };

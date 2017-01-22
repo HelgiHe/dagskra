@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
 import { Text, ScrollView } from 'react-native';
 import axios from 'axios';
-import { Card, CardSection, Button } from './common';
+import { Card, CardSection, Spinner } from './common';
 import ChannelItem from './ChannelItem';
 
 export default class ChannelList extends Component {
   constructor(props) {
     super(props);
-    this.state = { channels: [] };
+    this.state = { channels: [], loading: true };
   }
 
 componentWillMount() {
   axios.get('https://apis.is/tv/')
-     .then(response => this.setState({ channels: response.data.results[0].channels }));
+     .then(response => this.setState({ channels: response.data.results[0].channels, loading: false }));
      //.then(response => console.log(response.data.results[0].channels));
+ }
+
+ showSpinner() {
+   if (this.state.loading === true) {
+     return <Spinner size='large' />;
+   }
+   return;
  }
 
  renderChannels() {
@@ -23,8 +30,9 @@ componentWillMount() {
   render() {
     return (
 
-        <ScrollView style={{ backgroundColor: '#D7E9F4' }}>
+        <ScrollView>
           {this.renderChannels()}
+          {this.showSpinner()}
         </ScrollView>
 
     );
