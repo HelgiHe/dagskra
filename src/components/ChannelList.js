@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Card, CardSection, Button } from './common';
 import ChannelItem from './ChannelItem';
 
-export class ChannelList extends Component {
+export default class ChannelList extends Component {
   constructor(props) {
     super(props);
     this.state = { channels: [] };
