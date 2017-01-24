@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, ScrollView, ListView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import axios from 'axios';
 import { Spinner } from './common';
 import ChannelItem from './ChannelItem';
@@ -29,12 +29,14 @@ componentWillMount() {
  }
   render() {
     return (
-
+<View>
     <ScrollView>
           {this.renderChannels()}
-          {this.showSpinner()}
-        </ScrollView> 
-
+      </ScrollView>
+    <View style={{ padding: 30 }}>
+      {this.showSpinner()}
+    </View>
+</View>
     );
   }
 }
