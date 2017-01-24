@@ -3,7 +3,6 @@ import { Text } from 'react-native';
 import { CardSection } from './common';
 
 const ScheduleItem = ({ item }) => {
-
   const time = clipString(item.startTime);
 
     return (

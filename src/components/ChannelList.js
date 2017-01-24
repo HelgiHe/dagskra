@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Text, ScrollView } from 'react-native';
+import { Text, ScrollView, ListView } from 'react-native';
 import axios from 'axios';
-import { Card, CardSection, Spinner } from './common';
+import { Spinner } from './common';
 import ChannelItem from './ChannelItem';
 
 export default class ChannelList extends Component {
@@ -30,10 +30,10 @@ componentWillMount() {
   render() {
     return (
 
-        <ScrollView>
+    <ScrollView>
           {this.renderChannels()}
           {this.showSpinner()}
-        </ScrollView>
+        </ScrollView> 
 
     );
   }

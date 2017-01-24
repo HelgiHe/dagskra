@@ -12,7 +12,7 @@ const RouterComponent = () => {
 
   return (
     <Router sceneStyle={{ paddingTop: 65 }}>
-      <Scene key='list' component={ChannelList} title="Stöðvar" />
+      <Scene key='list' component={ChannelList} title="Sjónvarpsstöðvar" />
       <Scene key='channel' component={Schedule} title={date} />
     </Router>
   );

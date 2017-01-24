@@ -1,33 +1,42 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
-import { Text, ScrollView } from 'react-native';
-import { Card, CardSection, Button, Spinner } from './common';
+import { ListView, Text, View } from 'react-native';
+import { Spinner, CardSection, Card } from './common';
 import ScheduleItem from './ScheduleItem';
 
 export default class Schedule extends Component {
   constructor(props) {
   super(props);
 
-  this.state = { schedule: [], loading: true };
+  this.state = { loading: true,
+    dataSource: new ListView.DataSource({
+    rowHasChanged: (row1, row2) => row1 !== row2,
+      }) };
 }
 
   componentWillMount() {
     const endpoint = this.props.channel.endpoint;
     const url = 'https://apis.is' + endpoint;
     axios.get(url)
-       .then(response => this.setState({ schedule: response.data.results, loading: false }));
-       //.then(response => console.log(response.data.results));
+       .then(response => this.setState({ loading: false,
+          dataSource: this.state.dataSource.cloneWithRows(response.data.results) }));
   }
 
   showSpinner() {
     if (this.state.loading === true) {
-      return <Spinner size='large' />;
+      return <Spinner style={{ paddingTop: 50 }} size='large' />;
     }
     return;
   }
 
   renderRow(item) {
-    return <ScheduleItem item={item} />;
+    const time = clipString(item.startTime);
+
+    return (<CardSection>
+      <Text>{item.title}</Text>
+      <Text>{time}</Text>
+      </CardSection>
+    );
   }
 
   renderChannels() {
@@ -37,10 +46,23 @@ export default class Schedule extends Component {
 
   render() {
     return (
+    <Card>
+      <ListView
+        dataSource={this.state.dataSource}
+        renderRow={this.renderRow}
+      />
+    {this.showSpinner()}
+  </Card>
+    /*
       <ScrollView>
         {this.renderChannels()}
         {this.showSpinner()}
-      </ScrollView>
+      </ScrollView> */
     );
   }
+}
+
+function clipString(str) {
+  const a = str.substring(11, 16);
+  return a;
 }
