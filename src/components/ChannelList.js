@@ -12,7 +12,7 @@ export default class ChannelList extends Component {
 
 componentWillMount() {
   axios.get('https://apis.is/tv/')
-     .then(response => this.setState({ channels: response.data.results[0].channels, loading: false }));
+  .then(response => this.setState({ channels: response.data.results[0].channels, loading: false }));
      //.then(response => console.log(response.data.results[0].channels));
  }
 
@@ -30,10 +30,10 @@ componentWillMount() {
   render() {
     return (
 <View>
-    <ScrollView>
-          {this.renderChannels()}
-      </ScrollView>
-    <View style={{ padding: 30 }}>
+  <ScrollView>
+      {this.renderChannels()}
+    </ScrollView>
+    <View>
       {this.showSpinner()}
     </View>
 </View>

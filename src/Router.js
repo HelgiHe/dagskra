@@ -5,10 +5,9 @@ import Schedule from './components/Schedule';
 
 const RouterComponent = () => {
 
-  let date = () => {
+  const date = () => {
     return new Date().toString().substring(0, 10);
   };
-
 
   return (
     <Router sceneStyle={{ paddingTop: 65 }}>

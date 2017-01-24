@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { ListView, Text, View } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { Spinner, CardSection } from './common';
-import ScheduleItem from './ScheduleItem';
 
 export default class Schedule extends Component {
   constructor(props) {
@@ -19,7 +19,8 @@ export default class Schedule extends Component {
     const url = `https://apis.is${endpoint}`;
     axios.get(url)
        .then(response => this.setState({ loading: false,
-          dataSource: this.state.dataSource.cloneWithRows(response.data.results) }));
+          dataSource: this.state.dataSource.cloneWithRows(response.data.results) }))
+          .catch(() => Actions.pop());
   }
 
   showSpinner() {
@@ -37,11 +38,6 @@ export default class Schedule extends Component {
       <Text>{time}</Text>
       </CardSection>
     );
-  }
-
-  renderChannels() {
-    return this.state.schedule.map((item, index) =>
-      <ScheduleItem key={index} item={item} />);
   }
 
   render() {
